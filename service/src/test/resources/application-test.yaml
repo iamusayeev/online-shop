@@ -1,6 +1,16 @@
 spring:
   datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5433/postgres
     username: postgres
     password: postgres
   jpa:
-    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: 'true'
+        temp:
+          use_jdbc_metadata_defaults: false
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: none

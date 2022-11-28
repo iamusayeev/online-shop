@@ -11,12 +11,17 @@ import az.online.shop.mapper.UserCreateEditMapper;
 import az.online.shop.mapper.UserReadMapper;
 import az.online.shop.repository.QPredicates;
 import az.online.shop.repository.UserRepository;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -25,13 +30,14 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserReadMapper userReadMapper;
     private final UserCreateEditMapper userCreateEditMapper;
     private final UserRepository userRepository;
     private final ImageService imageService;
 
+    //    @PostFilter("filterObject.role.name().equals('ADMIN')")
     public Page<UserReadDto> findAll(UserFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.firstname(), user.personalInfo.firstname::containsIgnoreCase)
@@ -51,6 +57,7 @@ public class UserService {
                 .toList();
     }
 
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public Optional<UserReadDto> findById(Integer id) {
         return userRepository.findById(id)
                 .map(userReadMapper::map);
@@ -93,7 +100,6 @@ public class UserService {
         }
     }
 
-
     @Transactional
     public boolean delete(Integer id) {
         return userRepository.findById(id)
@@ -104,7 +110,14 @@ public class UserService {
                 }).orElse(false);
     }
 
-    public Optional<User> findByUsernameAndPassword(LoginDto loginDto) {
-        return userRepository.findByUsernameAndPassword(loginDto.getUsername(), loginDto.getPassword());
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByUsername(username)
+                .map(user -> new org.springframework.security.core.userdetails.User(
+                        user.getUsername(),
+                        user.getPassword(),
+                        Collections.singleton(user.getRole())
+                ))
+                .orElseThrow(() -> new UsernameNotFoundException("message failed to retrieve user: " + username));
     }
 }
