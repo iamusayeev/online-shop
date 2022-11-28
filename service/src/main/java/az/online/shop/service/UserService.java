@@ -37,7 +37,6 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final ImageService imageService;
 
-    //    @PostFilter("filterObject.role.name().equals('ADMIN')")
     public Page<UserReadDto> findAll(UserFilter filter, Pageable pageable) {
         var predicate = QPredicates.builder()
                 .add(filter.firstname(), user.personalInfo.firstname::containsIgnoreCase)
