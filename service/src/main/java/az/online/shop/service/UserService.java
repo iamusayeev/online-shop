@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -55,7 +54,6 @@ public class UserService implements UserDetailsService {
                 .toList();
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public Optional<UserReadDto> findById(Integer id) {
         return userRepository.findById(id)
                 .map(userReadMapper::map);
