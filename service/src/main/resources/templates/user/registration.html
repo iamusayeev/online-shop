@@ -53,10 +53,6 @@
             <td><input type="file" name="image"></td>
         </tr>
         </tr>
-        <div th:each="role : ${roles}">
-            <input id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
-            <label th:for="${role}" th:text="${role}">Role name</label>
-        </div>
     </table>
     <button type="submit">
         <span th:text="#{registration}">Registration</span>

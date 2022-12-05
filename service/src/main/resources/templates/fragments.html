@@ -6,27 +6,14 @@
 </head>
 <body>
 <div th:fragment="header">
+    <div th:insert="~{fragments/menu.html :: #nav-menu}"></div>
     <span th:text="${#authentication.principal.username}">Username</span>
     <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
+        <button type="submit">
+            <span th:text="#{logout}">Logout</span>
+        </button>
     </form>
     <div th:insert="~{fragments :: locale}"></div>
-    <table>
-        <tr>
-            <td><a th:href="@{/}">
-                <span th:text="#{home}">Home</span>
-            </a></td>
-            <td><a th:href="@{/products}">
-                <span th:text="#{products}">Products</span>
-            </a></td>
-            <td><a th:href="@{/login}">
-                <span th:text="#{login}">Login</span>
-            </a></td>
-            <td><a th:href="@{/users}">
-                <span th:text="#{users}">Users</span>
-            </a></td>
-        </tr>
-    </table>
 </div>
 <div th:fragment="locale">
     <form action="">
