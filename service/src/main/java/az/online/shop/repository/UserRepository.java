@@ -13,16 +13,4 @@ public interface UserRepository extends JpaRepository<User, Integer>, QuerydslPr
     List<User> findAll(Predicate predicate);
 
     Optional<User> findByUsername(String username);
-
-//    List<User> hey();
-
-//    @Query(name = """
-//            select user0_.lastname
-//            from users user0_
-//                     inner join
-//                 orders orders1_ on user0_.id = orders1_.user_id
-//                     join orders_details od on orders1_.id = od.order_id
-//            """, nativeQuery = true)
-//    List<User> test();
-
 }
