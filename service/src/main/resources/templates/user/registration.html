@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+
+<div th:insert="fragments :: locale"></div>
+<form th:action="@{/users}" method="post" enctype="multipart/form-data" th:value="${user}">
+
+    <table border="1">
+        <tr>
+            <td>
+                <span th:text="#{username}">Username:</span>
+            </td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{password}">Password:</span>
+            </td>
+            <td><input type="password" name="rawPassword"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{birthdate}">Birthdate:</span>
+            </td>
+            <td><input type="date" name="birthDate"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{email}">Email:</span>
+            </td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{lastname}">Lastname:</span>
+            </td>
+            <td><input type="text" name="lastname"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{firstname}">Firstname:</span>
+            </td>
+            <td><input type="text" name="firstname"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{image}">Image:</span>
+            </td>
+            <td><input type="file" name="image"></td>
+        </tr>
+        </tr>
+        <div th:each="role : ${roles}">
+            <input id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
+            <label th:for="${role}" th:text="${role}">Role name</label>
+        </div>
+    </table>
+    <button type="submit">
+        <span th:text="#{registration}">Registration</span>
+    </button>
+</form>
+</body>
+</html>

@@ -7,9 +7,11 @@ import az.online.shop.model.Status;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,8 +25,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
-@EqualsAndHashCode(exclude = "user")
-@ToString(exclude = "user")
+@EqualsAndHashCode(exclude = {"user", "details"})
+@ToString(exclude = {"user", "details"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -45,8 +47,9 @@ public class Order extends BaseEntity<Integer> {
     private LocalDateTime updatedAt;
 
     @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = LAZY)
     private List<OrdersDetails> details;
 }
