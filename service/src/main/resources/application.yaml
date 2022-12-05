@@ -13,3 +13,8 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+server:
+  port: 9090

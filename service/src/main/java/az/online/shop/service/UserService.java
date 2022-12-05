@@ -2,7 +2,6 @@ package az.online.shop.service;
 
 import static az.online.shop.entity.QUser.user;
 
-import az.online.shop.dto.LoginDto;
 import az.online.shop.dto.UserCreateEditDto;
 import az.online.shop.dto.UserFilter;
 import az.online.shop.dto.UserReadDto;
@@ -108,6 +107,7 @@ public class UserService implements UserDetailsService {
                     return true;
                 }).orElse(false);
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

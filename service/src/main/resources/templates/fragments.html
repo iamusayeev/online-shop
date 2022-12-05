@@ -10,6 +10,32 @@
     <form th:action="@{/logout}" method="post">
         <button type="submit">Logout</button>
     </form>
+    <div th:insert="~{fragments :: locale}"></div>
+    <table>
+        <tr>
+            <td><a th:href="@{/}">
+                <span th:text="#{home}">Home</span>
+            </a></td>
+            <td><a th:href="@{/products}">
+                <span th:text="#{products}">Products</span>
+            </a></td>
+            <td><a th:href="@{/login}">
+                <span th:text="#{login}">Login</span>
+            </a></td>
+            <td><a th:href="@{/users}">
+                <span th:text="#{users}">Users</span>
+            </a></td>
+        </tr>
+    </table>
+</div>
+<div th:fragment="locale">
+    <form action="">
+        <select name="lang" onchange="this.form.submit()">
+            <option></option>
+            <option value=" en">EN</option>
+            <option value="ru">RU</option>
+        </select>
+    </form>
 </div>
 </body>
 </html>

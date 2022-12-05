@@ -2,38 +2,65 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>find All</title>
+    <title>Registration</title>
 </head>
 <body>
 
-<form th:action="@{/users}" method="post" enctype="multipart/form-data" th:object="${user}">
-    <label for="username">Username:
-        <input id="username" type="text" name="username" th:value="*{username}">
-    </label><br>
-    <label for="birthDate"> Birthdate:
-        <input id="birthDate" type="date" name="birthDate" th:value="*{birthDate}">
-    </label><br>
-    <label for="email">Email:
-        <input id="email" type="text" name="email" th:value="*{email}">
-    </label><br>
-    <label for="rawPassword">Password:
-        <input id="rawPassword" type="password" name="rawPassword">
-    </label><br>
-    <label for="lastname">Lastname:
-        <input id="lastname" type="text" name="lastname" th:value="*{lastname}">
-    </label><br>
-    <label for="firstname">Firstname:
-        <input id="firstname" type="text" name="firstname" th:value="*{firstname}">
-    </label><br>
-    <label for="image"> Image:
-        <input id="image" type="file" name="image">
-    </label>
-    <div th:each="role : ${roles}">
-        <input id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
-        <label th:for="${role}" th:text="${role}">Role name</label>
-    </div>
-    <button type="submit"> Register</button>
+<div th:insert="fragments :: locale"></div>
+<form th:action="@{/users}" method="post" enctype="multipart/form-data" th:value="${user}">
 
+    <table border="1">
+        <tr>
+            <td>
+                <span th:text="#{username}">Username:</span>
+            </td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{password}">Password:</span>
+            </td>
+            <td><input type="password" name="rawPassword"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{birthdate}">Birthdate:</span>
+            </td>
+            <td><input type="date" name="birthDate"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{email}">Email:</span>
+            </td>
+            <td><input type="text" name="email"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{lastname}">Lastname:</span>
+            </td>
+            <td><input type="text" name="lastname"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{firstname}">Firstname:</span>
+            </td>
+            <td><input type="text" name="firstname"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{image}">Image:</span>
+            </td>
+            <td><input type="file" name="image"></td>
+        </tr>
+        </tr>
+        <div th:each="role : ${roles}">
+            <input id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
+            <label th:for="${role}" th:text="${role}">Role name</label>
+        </div>
+    </table>
+    <button type="submit">
+        <span th:text="#{registration}">Registration</span>
+    </button>
 </form>
 </body>
 </html>
