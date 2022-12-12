@@ -7,7 +7,6 @@ import az.online.shop.model.Status;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -25,7 +24,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Data
-@EqualsAndHashCode(exclude = {"user", "details"})
+@EqualsAndHashCode(exclude = {"user", "details"}, callSuper = false)
 @ToString(exclude = {"user", "details"})
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,6 +49,6 @@ public class Order extends BaseEntity<Integer> {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order", fetch = LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<OrdersDetails> details;
 }

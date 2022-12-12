@@ -1,0 +1,19 @@
+<!--<form th:action="@{/login}" method="post">-->
+<!--    <table border="1">-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <span th:text="#{username}">Username:</span>-->
+<!--            </td>-->
+<!--            <td><input type="text" name="username"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <span th:text="#{password}">Password:</span>-->
+<!--            </td>-->
+<!--            <td><input type="password" name="password"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--    <button type="submit">-->
+<!--        <span th:text="#{login}">Login</span>-->
+<!--    </button>-->
+<!--</form>-->

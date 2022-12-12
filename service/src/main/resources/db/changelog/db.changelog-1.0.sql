@@ -19,7 +19,8 @@ CREATE TABLE users
 
 CREATE TABLE bucket
 (
-    id          SERIAL PRIMARY KEY,
+    id      SERIAL PRIMARY KEY,
+--     status  VARCHAR(32),
     user_id INT REFERENCES users
 );
 
@@ -41,8 +42,8 @@ create table product
 CREATE TABLE buckets_products
 (
     id         SERIAL PRIMARY KEY,
-    bucket_id  INT REFERENCES bucket,
-    product_id INT REFERENCES product
+    bucket_id  INT REFERENCES bucket ON DELETE CASCADE,
+    product_id INT REFERENCES product ON DELETE CASCADE
 );
 
 --rollback DROP TABLE buckets_products
@@ -51,8 +52,8 @@ CREATE TABLE buckets_products
 
 CREATE TABLE category
 (
-    id    SERIAL PRIMARY KEY,
-    title VARCHAR(255)
+    id   SERIAL PRIMARY KEY,
+    name VARCHAR(255)
 );
 
 --rollback DROP TABLE category
@@ -72,13 +73,13 @@ CREATE TABLE products_categories
 
 CREATE TABLE orders
 (
-    id          SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users,
-    address     VARCHAR(255),
-    status      VARCHAR(255),
-    sum         NUMERIC(19, 2),
-    created_at  TIMESTAMP,
-    updated_at  TIMESTAMP
+    id         SERIAL PRIMARY KEY,
+    user_id    INT REFERENCES users,
+    address    VARCHAR(255),
+    status     VARCHAR(32),
+    sum        NUMERIC(19, 2),
+    created_at TIMESTAMP,
+    updated_at TIMESTAMP
 );
 
 --rollback DROP TABLE orders

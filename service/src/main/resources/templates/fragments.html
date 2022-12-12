@@ -7,15 +7,10 @@
 <body>
 <div th:fragment="header">
     <div th:insert="~{fragments/menu.html :: #nav-menu}"></div>
-    <span th:text="${#authentication.principal.username}">Username</span>
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">
-            <span th:text="#{logout}">Logout</span>
-        </button>
     </form>
     <div th:insert="~{fragments :: locale}"></div>
 </div>
-<div th:fragment="locale">
+<div th:fragment="locale" align="left">
     <form action="">
         <select name="lang" onchange="this.form.submit()">
             <option></option>

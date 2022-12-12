@@ -1,0 +1,46 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>User list</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div th:insert="~{fragments.html :: header}"></div>-->
+
+<!--<table border="1" width="100">-->
+<!--    <tr>-->
+<!--        <td>-->
+<!--            <span th:text="#{id}">Id</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <span th:text="#{username}">Username</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <span th:text="#{firstname}">Firstname</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <span th:text="#{email}">Email</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <span th:text="#{birthdate}">Birthdate</span>-->
+<!--        </td>-->
+<!--        <td>-->
+<!--            <span th:text="#{photo}">Photo</span>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    <tr th:each="user : ${userList}">-->
+<!--        <td th:text="${user.id}">id</td>-->
+<!--        <td th:text="${user.username}">username</td>-->
+<!--        <td th:text="${user.firstname}">firstname</td>-->
+<!--        <td th:text="${user.email}">email</td>-->
+<!--        <td th:text="${user.birthDate}">birthdate</td>-->
+<!--        <td th:if="${user.image}">-->
+<!--            <img width="40" height="40" th:src="@{/api/v1/users/{userId}/avatar(userId=${user.id})}" alt="User image">-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--</table>-->
+<!--<td>-->
+<!--    <a th:href="@{/users/new}"><span th:text="#{add.new.user}">Add new user</span></a>-->
+<!--</td>-->
+<!--</body>-->
+<!--</html>-->

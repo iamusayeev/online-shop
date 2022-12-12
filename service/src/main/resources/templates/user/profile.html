@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<div th:insert="~{fragments.html :: header}"></div>
+<h1 align="center">Change password</h1>
+<form th:action="@{/users/profile}" th:object="${user}" method="post">
+    <table border="1" align="center">
+        <tr>
+            <td>
+                <span th:text="#{username}">Username</span>
+            </td>
+            <td><input type="text" readonly name="username" th:field="*{username}" th:value="*{username}"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{email}">Email</span>
+            </td>
+            <td><input type="text" readonly name="email" th:field="*{email}" th:value="*{email}"></td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{password}">Password</span>
+            </td>
+            <td><input type="password" name="password">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{confirm}">Matching password</span>
+            </td>
+            <td><input type="password" name="matchingPassword"></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right">
+                <button type="submit">
+                    <span th:text="#{update}">Update</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+
+</form>
+
+</body>
+</html>

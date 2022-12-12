@@ -13,16 +13,18 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(exclude = "bucket")
-@ToString(exclude = "product")
+@EqualsAndHashCode(exclude = {"bucket", "product"}, callSuper = false)
+@ToString(exclude = {"bucket", "product"})
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Table(name = "buckets_products")
 @Entity
 public class BucketsProducts extends BaseEntity<Integer> {
+
     @ManyToOne(fetch = LAZY)
     private Bucket bucket;
+
     @ManyToOne(fetch = LAZY)
     private Product product;
 }

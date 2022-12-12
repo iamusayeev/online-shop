@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>find All</title>
+</head>
+<body>
+<div th:insert="~{fragments.html :: header}"></div>
+<table border="1" align="center">
+    <tr>
+        <th>Address</th>
+        <th>Sum</th>
+        <th>Status</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.address}">Address</td>
+        <td th:text="${order.sum}">Sum</td>
+        <td th:text="${order.status}">Status</td>
+    </tr>
+
+</table>
+</body>
+</html>
+
+

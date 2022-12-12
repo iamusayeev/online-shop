@@ -7,43 +7,42 @@
 <body>
 <div th:insert="~{fragments.html :: header}"></div>
 <form th:action="@{/users/{userId}/update(userId=${user.id})}" enctype="multipart/form-data" method="post" th:object="${user}">
-    <label for="username">Username:
-        <input id="username" type="text" name="username" th:value="*{username}">
+    <label for="username">
+        <span th:text="#{username}">Username</span>
+        <input id="username" type="text" readonly name="username" th:value="*{username}">
     </label><br>
-    <label for="birthdate">Birthdate:
-        <input id="birthdate" type="date" name="birthDate" th:value="${user.birthDate}">
+    <label for="birthdate">
+        <span th:text="#{birthdate}">Birthdate</span>
+        <input id="birthdate" type="date" readonly name="birthDate" th:value="${user.birthDate}">
     </label><br>
-    <label for="email">Email:
-        <input id="email" type="text" name="email" th:value="*{email}">
+    <label for="email">
+        <span th:text="#{email}">Email</span>
+        <input id="email" type="text" readonly name="email" th:value="*{email}">
     </label><br>
-    <label for="password">Password:
-        <input id="password" type="password" name="password" th:value="*{password}">
+    <label for="lastname">
+        <span th:text="#{lastname}">Lastname</span>
+        <input id="lastname" type="text" readonly name="lastname" th:value="*{lastname}">
     </label><br>
-    <label for="lastname">Lastname:
-        <input id="lastname" type="text" name="lastname" th:value="*{lastname}">
-    </label><br>
-    <label for="firstname"> Firstname:
-        <input id="firstname" type="text" name="firstname" th:value="*{firstname}">
+    <label for="firstname">
+        <span th:text="#{firstname}">Firstname</span>
+        <input id="firstname" type="text" readonly name="firstname" th:value="*{firstname}">
     </label>
     <div th:if="${user.image}">
-        <img th:src="@{/api/v1/users/{userId}/avatar(userId=${user.id})}" alt="User image">
+        <img width="40" height="40" th:src="@{/api/v1/users/{userId}/avatar(userId=${user.id})}" alt="User image">
     </div>
-    <label for="image"> Image:
-        <input id="image" type="file" name="image">
-    </label>
+    <br>
     <div th:each="role : ${roles}">
         <input th:id="${role}" type="radio" name="role" th:value="${role}" th:checked="${role == user.role}">
         <label th:for="${role}" th:text="${role}">Role name</label>
     </div>
-    <button type="submit"> Update</button>
+    <button type="submit">
+        <span th:text="#{update}">Update</span>
+    </button>
 </form>
-
-<form action="/users/registration">
-    <button type="submit">Registration</button>
-</form>
-
-<form th:action="@{/users/{userId}/delete(userId=${user.id})}" th:if="${user.role.name() == 'ADMIN'}" method="post">
-    <button type="submit">Remove</button>
+<form th:action="@{/users/{userId}/delete(userId=${user.id})}" method="post">
+    <button type="submit">
+        <span th:text="#{remove}">Remove</span>
+    </button>
 </form>
 </body>
 </html>

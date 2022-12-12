@@ -6,35 +6,146 @@
 </head>
 <body>
 <div th:insert="~{fragments.html :: header}"></div>
-<form action="/users" th:object="${filter}">
-    <label for="firstname">
-        <span th:text="#{firstname}">Firstname:</span>
-        <input id="firstname" type="text" name="firstname" th:value="*{firstname()}">
-    </label><br>
-    <label for="lastname">
-        <span th:text="#{lastname}">Lastname:</span>
-        <input id="lastname" type="text" name="lastname" th:value="*{lastname()}">
-    </label><br>
-    <label for="birthDate">
-        <span th:text="#{birthdate}">Birthdate:</span>
-        <input id="birthDate" type="date" name="birthDate" th:value="${time}">
-    </label><br>
-    <div>
-        <label for="page">
-            <span th:text="#{page}">Page:</span>
-            <input id="page" type="number" name="page" th:value="${users.metadata.page}">
-        </label><br>
-        <label for="size">
-            <span th:text="#{size}">Size:</span>
-            <input id="size" type="number" name="size" th:value="${users.metadata.size}">
-        </label><br>
-    </div>
-    <button type="submit">
-        <span th:text="#{filter}"></span>
-    </button>
-</form>
-<div th:each="user : ${users.content}">
-    <a th:href="@{'/users/' + ${user.id}}" th:text="|${user.id}. ${user.username}|">User</a>
+<table border="1" align="center" cellpadding="1" cellspacing="2">
+    <form action="/users" th:object="${filter}">
+        <h1 align="center"><span th:text="#{users}">Users</span></h1>
+        <tr>
+            <th>
+                <span th:text="#{firstname}">Firstname</span>
+            </th>
+            <th>
+                <span th:text="#{lastname}">Lastname</span>
+            </th>
+            <th>
+                <span th:text="#{birthdate}">Birthdate</span>
+            </th>
+            <th>
+                <span th:text="#{page}">Page</span>
+            </th>
+            <th>
+                <span th:text="#{size}">Size</span>
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="firstname" th:value="*{firstname()}">
+            </td>
+            <td>
+                <input type="text" name="lastname" th:value="*{lastname()}">
+            </td>
+            <td>
+                <input type="date" name="birthDate" th:value="${time}">
+            </td>
+            <td>
+                <input type="number" name="page" th:value="${users.metadata.page}">
+            </td>
+            <td>
+                <input type="number" name="size" th:value="${users.metadata.size}">
+            </td>
+            <td>
+                <button type="submit">
+                    <span th:text="#{filter}">Filter</span>
+                </button>
+            </td>
+        </tr>
+    </form>
+</table>
+<br>
+<div align="center">
+    <span th:text="#{user.update}">To change the role of a user, click on it</span>
 </div>
+<table border="1" align="center" cellpadding="1" cellspacing="2" width="100%">
+    <thead>
+    <tr>
+        <th>
+            <span th:text="#{id}">Id</span>
+        </th>
+        <th>
+            <span th:text="#{username}">Username</span>
+        </th>
+        <th>
+            <span th:text="#{firstname}">Firstname</span>
+        </th>
+        <th>
+            <span th:text="#{lastname}">Lastname</span>
+        </th>
+        <th>
+            <span th:text="#{birthdate}">Birthdate</span>
+        </th>
+        <!--        image-->
+        <!--        <th>-->
+        <!--            <span th:text="#{lastnameimage}">Lastname</span>-->
+        <!--        </th>-->
+        <th>
+            <span th:text="#{role}">Role</span>
+        </th>
+        <th>
+            <span th:text="#{email}">Email</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users.content}">
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.id}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.username}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.firstname}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.lastname}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.birthDate}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.role}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/users/' + ${user.id}}" th:text="${user.email}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<!--<div align="center" th:each="user : ${users.content}">-->
+<!--    <a th:href="@{'/users/' + ${user.id}}" th:text="|${user.id}. ${user.username}|">User</a>-->
+<!--</div>-->
+<!--<div>-->
+<!--    <a th:href="@{/users/new}"><span th:text="#{add.new.user}">Add new user</span></a>-->
+<!--</div>-->
 </body>
 </html>
+
+
+<!--<form action="/users/filter" th:object="${filter}">-->
+<!--    <label for="firstname">-->
+<!--        <span th:text="#{firstname}">Firstname:</span>-->
+<!--        <input id="firstname" type="text" name="firstname" th:value="*{firstname()}">-->
+<!--    </label><br>-->
+<!--    <label for="lastname">-->
+<!--        <span th:text="#{lastname}">Lastname:</span>-->
+<!--        <input id="lastname" type="text" name="lastname" th:value="*{lastname()}">-->
+<!--    </label><br>-->
+<!--    <label for="birthDate">-->
+<!--        <span th:text="#{birthdate}">Birthdate:</span>-->
+<!--        <input id="birthDate" type="date" name="birthDate" th:value="${time}">-->
+<!--    </label><br>-->
+<!--    <div>-->
+<!--        <label for="page">-->
+<!--            <span th:text="#{page}">Page:</span>-->
+<!--            <input id="page" type="number" name="page" th:value="${users.metadata.page}">-->
+<!--        </label><br>-->
+<!--        <label for="size">-->
+<!--            <span th:text="#{size}">Size:</span>-->
+<!--            <input id="size" type="number" name="size" th:value="${users.metadata.size}">-->
+<!--        </label><br>-->
+<!--    </div>-->
+<!--    <button type="submit">-->
+<!--        <span th:text="#{filter}"></span>-->
+<!--    </button>-->

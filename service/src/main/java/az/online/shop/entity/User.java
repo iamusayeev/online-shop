@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(exclude = {"bucket", "orders"})
+@EqualsAndHashCode(exclude = {"bucket", "orders"}, callSuper = false)
 @ToString(exclude = {"bucket", "orders"})
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,16 +29,21 @@ import lombok.ToString;
 @Table(name = "users")
 @Entity
 public class User extends BaseEntity<Integer> {
+
     private String username;
     private String email;
     private String password;
     private String image;
+
     @Embedded
     private PersonalInfo personalInfo;
+
     @Enumerated(STRING)
     private Role role;
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
+
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.REMOVE)
     private Bucket bucket;
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Order> orders;
 }
