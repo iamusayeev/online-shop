@@ -21,7 +21,7 @@ public class SecurityConfiguration {
         http
                 .authorizeHttpRequests(urlConfig -> urlConfig
                         .antMatchers("/login", "/users/registration", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                        .antMatchers("/users").hasAuthority(ADMIN.getAuthority())
+                        .antMatchers(HttpMethod.GET,"/users").hasAuthority(ADMIN.getAuthority())
                         .antMatchers("users/{\\id}/delete").hasAuthority(ADMIN.getAuthority())
                         .antMatchers(HttpMethod.GET, "/orders/findAllByUser").hasAuthority(USER.getAuthority())
                         .antMatchers(HttpMethod.GET, "/orders").hasAuthority(ADMIN.getAuthority())
@@ -29,7 +29,6 @@ public class SecurityConfiguration {
                         .antMatchers(HttpMethod.GET, "/categories").permitAll()
                         .antMatchers(HttpMethod.GET, "/products").permitAll()
                         .antMatchers("/admin/**").hasAuthority(ADMIN.getAuthority())
-                        .antMatchers(HttpMethod.POST, "/users").permitAll()
                         .antMatchers(HttpMethod.GET, "/users").hasAnyAuthority(ADMIN.getAuthority(), MANAGER.getAuthority())
                         .antMatchers("/users/{\\d+}/delete").hasAuthority(ADMIN.getAuthority())
                         .antMatchers(HttpMethod.POST, "/categories").hasAuthority(ADMIN.getAuthority())

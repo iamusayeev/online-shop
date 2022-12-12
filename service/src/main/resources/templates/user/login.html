@@ -6,8 +6,8 @@
 </head>
 <body>
 <div th:insert="fragments :: locale"></div>
-<form th:action="@{/login}" method="post">
-    <table border="1" align="center">
+<table border="1" align="center">
+    <form th:action="@{/login}" method="post">
         <tr>
             <td>
                 <span th:text="#{username}">Username</span>
@@ -31,15 +31,22 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: right">
-                <form action="/users/registration">
-                    <button type="submit">
-                        <span th:text="#{registration}">Registration</span>
-                    </button>
-                </form>
+
             </td>
         </tr>
-    </table>
-</form>
+    </form>
+
+    <form th:action="@{/users/registration}">
+        <tr>
+            <td colspan="2" style="text-align: right">
+                <button type="submit">
+                    <span th:text="#{registration}">Registration</span>
+                </button>
+
+            </td>
+        </tr>
+    </form>
+</table>
 
 <div style="color: red" th:if="${param.error}">
     <span th:text="#{login.error.message}">Login or password are not correct.</span>

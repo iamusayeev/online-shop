@@ -59,7 +59,9 @@
             </button>
         </form>
         <div sec:authorize="hasAnyAuthority('USER')" style="position: absolute; right: 0; top 10;">
-            <a th:href="@{/users/profile}"><span><td>Settings</td></span></a>
+            <a th:href="@{/users/profile}"><span><td>
+                <span th:text="#{settings}">Settings</span>
+            </td></span></a>
         </div>
     </div>
 </div>
