@@ -22,7 +22,7 @@ public class BucketController {
     private final BucketService bucketService;
 
     @GetMapping
-    public String aboutBucket(Model model, Principal principal) {
+    public String getBucketByUser(Model model, Principal principal) {
         if (principal == null) {
             model.addAttribute("bucket", new BucketDTO());
         } else {

@@ -14,8 +14,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class ImageService {
 
-    @Value("${bucket}")
-    private String bucket;
+    private final String bucket;
+
+    public ImageService(@Value("${bucket}") String bucket) {
+        this.bucket = bucket;
+    }
 
     @SneakyThrows
     public void upload(String imagePath, InputStream content) {

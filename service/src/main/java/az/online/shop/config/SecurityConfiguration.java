@@ -16,12 +16,13 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 @EnableWebSecurity
 public class SecurityConfiguration {
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(urlConfig -> urlConfig
                         .antMatchers("/login", "/users/registration", "/v3/api-docs/**", "/swagger-ui/**").permitAll()
-                        .antMatchers(HttpMethod.GET,"/users").hasAuthority(ADMIN.getAuthority())
+                        .antMatchers(HttpMethod.GET, "/users").hasAuthority(ADMIN.getAuthority())
                         .antMatchers("users/{\\id}/delete").hasAuthority(ADMIN.getAuthority())
                         .antMatchers(HttpMethod.GET, "/orders/findAllByUser").hasAuthority(USER.getAuthority())
                         .antMatchers(HttpMethod.GET, "/orders").hasAuthority(ADMIN.getAuthority())

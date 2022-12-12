@@ -35,7 +35,6 @@
         <jacoco-maven-plugin.version>0.8.8</jacoco-maven-plugin.version>
         <maven-failsafe-plugin.version>3.0.0-M7</maven-failsafe-plugin.version>
         <maven-site-plugin.version>3.12.1</maven-site-plugin.version>
-<!--        <mapstruct.version>1.4.2.Final</mapstruct.version>-->
     </properties>
 
     <dependencyManagement>
