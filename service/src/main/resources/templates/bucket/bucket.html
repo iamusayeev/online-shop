@@ -37,14 +37,14 @@
     </tr>
 </table>
 <br>
-<div align="center"  th:if="${bucket.bucketDetails.size != 0}">
+<div align="center" th:if="${bucket.bucketDetails.size != 0}">
     <span th:text="#{do.order}">Enter your address to place an order</span>
 </div>
 <form th:action="@{/orders}" method="post" th:if="${bucket.bucketDetails.size > 0}">
     <table border="1" align="center">
         <tr>
             <th>
-                Address:
+                <span th:text="#{address}">Address</span>
             </th>
             <td>
                 <input type="text" name="address">
@@ -52,7 +52,7 @@
         </tr>
         <tr>
             <th>
-                Sum:
+                <span th:text="#{sum}">Sum</span>
             </th>
             <td>
                 <input type="text" readonly name="sum" th:value="${bucket.sum}">
@@ -60,7 +60,9 @@
         </tr>
         <tr>
             <td colspan="2" style="text-align: right">
-                <button type="submit">Order</button>
+                <button type="submit">
+                    <span th:text="#{order}">Order</span>
+                </button>
             </td>
         </tr>
     </table>

@@ -21,12 +21,15 @@
     </label><br>
     <label for="lastname">
         <span th:text="#{lastname}">Lastname</span>
-        <input id="lastname" type="text" readonly name="lastname" th:value="*{lastname}">
+        <input id="lastname" type="text"  name="lastname" th:value="*{lastname}">
     </label><br>
     <label for="firstname">
         <span th:text="#{firstname}">Firstname</span>
         <input id="firstname" type="text" readonly name="firstname" th:value="*{firstname}">
     </label>
+    <label for="image">Image:
+        <input id="image" readonly type="file" name="image">
+    </label><br>
     <div th:if="${user.image}">
         <img width="40" height="40" th:src="@{/api/v1/users/{userId}/avatar(userId=${user.id})}" alt="User image">
     </div>

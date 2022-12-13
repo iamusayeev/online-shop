@@ -15,16 +15,16 @@
         <th>
             <span th:text="#{price}">Price</span>
         </th>
-        <td>
+        <th>
             <span th:text="#{image}">Image</span>
-        </td>
+        </th>
     </tr>
     <tr th:each="product : ${products}">
         <td th:text="${product.title}">Cheese</td>
         <td th:text="${product.price}">12.0</td>
         <td>
             <div th:if="${product.image}">
-                <img width="40" height="40" th:src="@{/api/v1/products/{id}/avatar(id=${product.id})}">
+                <img width="200" height="200" th:src="@{/api/v1/products/{id}/avatar(id=${product.id})}">
             </div>
         </td>
         <td sec:authorize="hasAnyAuthority('USER')"><a th:href="@{/products/{id}/bucket(id=${product.id})}">

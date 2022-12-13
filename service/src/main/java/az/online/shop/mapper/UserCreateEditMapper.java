@@ -5,9 +5,7 @@ import static java.util.function.Predicate.not;
 import az.online.shop.dto.UserCreateEditDTO;
 import az.online.shop.entity.PersonalInfo;
 import az.online.shop.entity.User;
-import az.online.shop.model.Role;
 import java.util.Optional;
-import java.util.Random;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -34,22 +32,14 @@ public class UserCreateEditMapper implements Mapper<UserCreateEditDTO, User> {
         return user;
     }
 
-
     private void copy(UserCreateEditDTO object, User user) {
-        Random random = new Random();
         user.setUsername(object.getUsername());
-        user.setEmail(String.valueOf(random.nextInt()));
-        user.setPassword(object.getPassword());
+        user.setEmail(object.getEmail());
         user.setPersonalInfo(new PersonalInfo(object.getFirstname(), object.getLastname(), object.getBirthDate()));
-        user.setRole(Role.USER);
+        user.setRole(object.getRole());
 
-        Optional.ofNullable(object.getPassword())
-                .filter(StringUtils::hasText)
-                .map(passwordEncoder::encode)
-                .ifPresent(user::setPassword);
+        Optional.ofNullable(object.getPassword()).filter(StringUtils::hasText).map(passwordEncoder::encode).ifPresent(user::setPassword);
 
-        Optional.ofNullable(object.getImage())
-                .filter(not(MultipartFile::isEmpty))
-                .ifPresent(image -> user.setImage(image.getOriginalFilename()));
+        Optional.ofNullable(object.getImage()).filter(not(MultipartFile::isEmpty)).ifPresent(image -> user.setImage(image.getOriginalFilename()));
     }
 }

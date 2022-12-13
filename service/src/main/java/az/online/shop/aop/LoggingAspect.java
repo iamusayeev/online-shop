@@ -13,16 +13,15 @@ public class LoggingAspect {
 
     @Around("az.online.shop.aop.CommonPointcuts.isServiceLayer()")
     public Object addLoggingAround(ProceedingJoinPoint joinPoint) throws Throwable {
-        var methodName = joinPoint.getSignature().getName();
-        String clazz = joinPoint.getTarget().toString();
-        Object[] args = joinPoint.getArgs();
-        log.info("before - invoked method: {} in class: {} args: {}", methodName, clazz, args);
+        log.info("before - invoked method: {} in class: {} args: {}", joinPoint.getSignature().getName(), joinPoint.getTarget(), joinPoint.getArgs());
         try {
             Object result = joinPoint.proceed();
-            log.info("after returning - invoked method: {} in class: {} args: {}", methodName, clazz, args);
+            log.info("after returning - invoked method: {} in class: {} args: {} result: {}", joinPoint.getSignature().getName(),
+                    joinPoint.getTarget(), joinPoint.getArgs(), result);
             return result;
         } catch (Throwable ex) {
-            log.error("after throwing - invoked method: {} in class: {} with exception message: {}", methodName, clazz, ex.getMessage());
+            log.error("after throwing - invoked method: {} in class: {} with exception message: {}", joinPoint.getSignature(), joinPoint.getTarget(),
+                    ex.getMessage());
             throw ex;
         }
     }
