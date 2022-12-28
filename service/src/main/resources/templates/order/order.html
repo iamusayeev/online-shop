@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Orders</title>
+</head>
+<body>
+<div th:insert="~{fragments.html :: header}"></div>
+<form sec:authorize="hasAnyAuthority('ADMIN')" th:action="@{/orders/{orderId}/update(orderId=${order.id})}" method="post" th:object="${order}">
+    <label for="address">
+        <span th:text="#{address}">Address</span>
+        <input id="address" readonly type="text" name="address" th:value="*{address}">
+    </label><br>
+    <label for="sum">
+        <span th:text="#{sum}">Sum</span>
+        <input id="sum" readonly type="number" name="sum" th:value="*{sum}">
+    </label><br>
+    <span th:text="#{status}">Status</span>
+    <div th:each="status : ${statuses}">
+        <input th:id="${status}" type="radio" name="status" th:value="${status}">
+        <label th:for="${status}" th:text="${status}">Status name</label>
+    </div>
+    <button type="submit"> Update</button>
+</form>
+
+</body>
+</html>

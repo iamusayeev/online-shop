@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@EqualsAndHashCode(exclude = {"product", "category"})
+@EqualsAndHashCode(exclude = {"product", "category"}, callSuper = false)
 @ToString(exclude = {"product", "category"})
 @AllArgsConstructor
 @NoArgsConstructor

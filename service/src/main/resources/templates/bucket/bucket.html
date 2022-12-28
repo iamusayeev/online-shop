@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Bucket</title>
+</head>
+<body>
+<div th:insert="~{fragments.html :: header}"></div>
+<h1 th:if="${bucket.bucketDetails.size == 0}">
+    <div align="center">
+        <span th:text="#{bucket.empty}">Your bucket is empty</span>
+    </div>
+</h1>
+<table border="1" align="center" th:if="${bucket.bucketDetails.size != 0}">
+    <h2 align="center">
+        <span th:text="#{bucket}">Bucket</span>
+    </h2>
+    <tr>
+        <th>
+            <span th:text="#{title}">Title</span>
+        </th>
+        <th>
+            <span th:text="#{amount}">Amount</span>
+        </th>
+        <th>
+            <span th:text="#{price}">Price</span>
+        </th>
+        <th>
+            <span th:text="#{sum}">Sum</span>
+        </th>
+    </tr>
+    <tr th:each="detail : ${bucket.bucketDetails}">
+        <td th:text="${detail.title}">Cheese</td>
+        <td th:text="${detail.amount}">2</td>
+        <td th:text="${detail.price}">11.0</td>
+        <td th:text="${detail.sum}">22</td>
+    </tr>
+</table>
+<br>
+<div align="center" th:if="${bucket.bucketDetails.size != 0}">
+    <span th:text="#{do.order}">Enter your address to place an order</span>
+</div>
+<form th:action="@{/orders}" method="post" th:if="${bucket.bucketDetails.size > 0}">
+    <table border="1" align="center">
+        <tr>
+            <th>
+                <span th:text="#{address}">Address</span>
+            </th>
+            <td>
+                <input type="text" name="address">
+            </td>
+        </tr>
+        <tr>
+            <th>
+                <span th:text="#{sum}">Sum</span>
+            </th>
+            <td>
+                <input type="text" readonly name="sum" th:value="${bucket.sum}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right">
+                <button type="submit">
+                    <span th:text="#{order}">Order</span>
+                </button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

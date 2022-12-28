@@ -13,4 +13,7 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: validate
-    open-in-view: true
+  messages:
+    basename: messages
+    fallback-to-system-locale: false
+bucket: C:\Users\anarm\learning\own-projects\online-shop\images

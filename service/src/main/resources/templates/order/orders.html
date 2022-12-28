@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>find All</title>
+</head>
+<body>
+<div th:insert="~{fragments.html :: header}"></div>
+<table border="1" align="center" cellpadding="1" cellspacing="2">
+    <form action="/orders" th:object="${filter}">
+        <h1 align="center"><span th:text="#{all.orders}">All orders</span></h1>
+        <tr>
+            <th>
+                <span th:text="#{address}">Address</span>
+            </th>
+            <th>
+                <span th:text="#{sum}">Sum</span>
+            </th>
+            <th>
+                <span th:text="#{status}">Status</span>
+            </th>
+            <br>
+            <th>
+                <span th:text="#{page}">Page</span>
+            </th>
+            <br>
+            <th>
+                <span th:text="#{size}">Size</span>
+            </th>
+            <br>
+            <th></th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="address" th:value="*{address()}">
+            </td>
+            <td>
+                <input type="number" name="sum" th:value="*{sum()}">
+            </td>
+            <td>
+                <input type="text" name="status" th:value="*{status()}">
+            </td>
+            <td>
+                <input type="number" name="page" th:value="${orders.metadata.page}">
+            </td>
+            <td>
+                <input type="number" name="size" th:value="${orders.metadata.size}">
+            </td>
+            <td>
+                <button type="submit">
+                    <span th:text="#{filter}">Filter</span>
+                </button>
+            </td>
+        </tr>
+    </form>
+</table>
+<br>
+<div align="center">
+    <span th:text="#{for.update}">For update status  click to order id</span>
+</div>
+<table border="1" align="center" cellpadding="1" cellspacing="2" width="100%">
+    <thead>
+    <tr>
+        <th>
+            <span th:text="#{id}">Id</span>
+        </th>
+        <th>
+            <span th:text="#{address}">Address</span>
+        </th>
+        <th>
+            <span th:text="#{sum}">Sum</span>
+        </th>
+        <th>
+            <span th:text="#{status}">Status</span>
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders.content}">
+        <td>
+            <a th:href="@{'/orders/' + ${order.id}}" th:text="${order.id}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/orders/' + ${order.id}}" th:text="${order.address}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/orders/' + ${order.id}}" th:text="${order.sum}"></a>
+        </td>
+        <td>
+            <a th:href="@{'/orders/' + ${order.id}}" th:text="${order.status}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
+

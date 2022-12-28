@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+</head>
+<body>
+<div th:insert="fragments :: locale"></div>
+<table border="1" align="center">
+    <form th:action="@{/login}" method="post">
+        <tr>
+            <td>
+                <span th:text="#{username}">Username</span>
+            </td>
+            <td><input type="text" name="username"></td>
+        </tr>
+        </tr>
+        <tr>
+            <td>
+                <span th:text="#{password}">Password</span>
+            </td>
+            <td><input type="password" name="password">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right">
+                <button type="submit">
+                    <span th:text="#{login}">Login</span>
+                </button>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: right">
+
+            </td>
+        </tr>
+    </form>
+
+    <form th:action="@{/users/registration}">
+        <tr>
+            <td colspan="2" style="text-align: right">
+                <button type="submit">
+                    <span th:text="#{registration}">Registration</span>
+                </button>
+
+            </td>
+        </tr>
+    </form>
+</table>
+<div style="color: red" th:if="${param.error}">
+    <span th:text="#{login.error.message}">Login or password are not correct.</span>
+</div>
+</body>
+</html>

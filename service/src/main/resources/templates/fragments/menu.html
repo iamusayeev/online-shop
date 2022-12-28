@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="nav-menu" align="center">
+    <div style="position: relative;">
+        <table>
+            <tr>
+                <td>
+                    <span th:text="#{menu}">Menu</span>
+                </td>
+                <td><a th:href="@{/}">
+                    <span th:text="#{home}">Home</span>
+                </a></td>
+                <td sec:authorize="permitAll()"><a th:href="@{/products}">
+                    <span th:text="#{products}">Products</span>
+                </a></td>
+                <td sec:authorize="permitAll()"><a th:href="@{/categories}">
+                    <!--                    th:text="#{categories}-->
+                    <span th:text="#{categories}">Categories</span>
+                </a></td>
+                <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')">
+                    <a th:href="@{/orders}">
+                        <span th:text="#{orders}">Orders</span>
+                    </a>
+                </td>
+                <td sec:authorize="hasAnyAuthority('USER')">
+                    <a th:href="@{/orders/findAllByUser}">
+                        <span th:text="#{orders}">Orders</span>
+                    </a>
+                </td>
+                <!--            <td><a th:href="@{/login}">-->
+                <!--                <span th:text="#{login}">Login</span>-->
+                <!--            </a></td>-->
+                <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a th:href="@{/users}">
+                    <span th:text="#{users}">Users</span>
+                </a></td>
+                <td sec:authorize="hasAnyAuthority('USER')"><a th:href="@{/buckets}">
+                    <span th:text="#{bucket}">Bucket</span>
+                </a></td>
+            </tr>
+        </table>
+        <form sec:authorize="isAuthenticated()" style="position: absolute; right:0; top: 0;" th:action="@{/logout}" method="post">
+            <button type="submit">
+                <span th:text="#{logout}">Logout</span>
+            </button>
+        </form>
+        <form sec:authorize="!isAuthenticated()" style="position: absolute; right:0; top: 0;" th:action="@{/login}" method="post">
+            <button type="submit">
+                <span th:text="#{login}">Login</span>
+            </button>
+        </form>
+        <form sec:authorize="!isAuthenticated()" style="position: absolute; right:0; top: 20;" th:action="@{/registration}" method="post">
+            <button type="submit">
+                <span th:text="#{registration}">Registration</span>
+            </button>
+        </form>
+        <div sec:authorize="hasAnyAuthority('USER')" style="position: absolute; right: 0; top 10;">
+            <a th:href="@{/users/profile}"><span><td>
+                <span th:text="#{settings}">Settings</span>
+            </td></span></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
